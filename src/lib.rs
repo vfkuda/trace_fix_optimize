@@ -17,12 +17,12 @@ pub fn sum_even(values: &[i64]) -> i64 {
     acc
 }
 
-/// Подсчёт ненулевых байтов. Буфер намеренно не освобождается,
-/// что приведёт к утечке памяти (Valgrind это покажет).
+/// Подсчёт ненулевых байтов.
 pub fn leak_buffer(input: &[u8]) -> usize {
     let boxed = input.to_vec().into_boxed_slice();
     let len = input.len();
-    let raw = Box::into_raw(boxed) as *mut u8;
+    // use as_ptr, to retain ownership
+    let raw = boxed.as_ptr();
 
     let mut count = 0;
     unsafe {
@@ -59,14 +59,11 @@ pub fn average_positive(values: &[i64]) -> f64 {
     }
 }
 
-/// Use-after-free: возвращает значение после освобождения бокса.
-/// UB, проявится под ASan/Miri.
 pub unsafe fn use_after_free() -> i32 {
     let b = Box::new(42_i32);
-    let raw = Box::into_raw(b);
+    let raw = &*b as *const i32;
     unsafe {
         let val = *raw;
-        drop(Box::from_raw(raw));
         val + *raw
     }
 }
