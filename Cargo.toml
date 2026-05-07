@@ -8,6 +8,14 @@ edition = "2024"
 [dev-dependencies]
 criterion = "0.5"
 
+[profile.release]
+# do all optimization but keep debug symbols
+debug = "line-tables-only"
+
 [[bench]]
 name = "baseline"
+harness = false
+
+[[bench]]
+name = "criterion"
 harness = false

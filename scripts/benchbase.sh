@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cargo flamegraph --bin demo4fg "$@"
+cargo bench --bench baseline
