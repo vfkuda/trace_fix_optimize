@@ -1,0 +1,143 @@
+   Compiling broken-app v0.1.0 (/xxx/src/rust-yap-course/mod05-project/github/trace_fix_optimize)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.28s
+info: for the target platform, using target runner `/xxx/.rustup/toolchains/nightly-aarch64-apple-darwin/bin/cargo-miri runner` defined by `target.cfg(all()).runner` specified by `--config`
+info: for the host platform, using target runner `/xxx/.rustup/toolchains/nightly-aarch64-apple-darwin/bin/cargo-miri runner` defined by `target.cfg(all()).runner` specified by `--config`
+────────────
+ Nextest run ID 8cdd6a10-9fdf-477a-a95b-39180ae1e7ad with nextest profile: default-miri
+    Starting 8 tests across 3 binaries
+        FAIL [   0.576s] (1/8) broken-app::integration race_increment_test
+  stdout ───
+
+    running 1 test
+    test race_increment_test ... 
+  stderr ───
+    error: Undefined Behavior: Data race detected between (1) non-atomic write on thread `unnamed-2` and (2) non-atomic read on thread `unnamed-3` at alloc43697
+      --> src/concurrency.rs:15:21
+       |
+    15 |                     COUNTER += 1;
+       |                     ^^^^^^^^^^^^ (2) just happened here
+       |
+    help: and (1) occurred earlier here
+      --> src/concurrency.rs:15:21
+       |
+    15 |                     COUNTER += 1;
+       |                     ^^^^^^^^^^^^
+       = help: this indicates a bug in the program: it performed an invalid operation, and caused Undefined Behavior
+       = help: see https://doc.rust-lang.org/nightly/reference/behavior-considered-undefined.html for further information
+       = note: this is on thread `unnamed-3`
+    note: the current function got called indirectly due to this code
+      --> src/concurrency.rs:12:22
+       |
+    12 |           handles.push(thread::spawn(move || {
+       |  ______________________^
+    13 | |             for _ in 0..iterations {
+    14 | |                 unsafe {
+    15 | |                     COUNTER += 1;
+    ...  |
+    18 | |         }));
+       | |__________^
+
+    note: some details are omitted, run with `MIRIFLAGS=-Zmiri-backtrace=full` for a verbose backtrace
+
+    error: aborting due to 1 previous error
+
+
+    (test failed with exit code 1)
+
+        PASS [   0.633s] (2/8) broken-app::integration fib_small_numbers
+        PASS [   0.633s] (3/8) broken-app::integration sums_even_numbers
+        PASS [   0.634s] (4/8) broken-app::integration dedup_preserves_uniques
+        FAIL [   0.635s] (5/8) broken-app::integration use_after_free_test
+  stdout ───
+
+    running 1 test
+    test use_after_free_test ... 
+  stderr ───
+    error: Undefined Behavior: memory access failed: alloc43710 has been freed, so this pointer is dangling
+      --> src/lib.rs:70:15
+       |
+    70 |         val + *raw
+       |               ^^^^ Undefined Behavior occurred here
+       |
+       = help: this indicates a bug in the program: it performed an invalid operation, and caused Undefined Behavior
+       = help: see https://doc.rust-lang.org/nightly/reference/behavior-considered-undefined.html for further information
+    help: alloc43710 was allocated here:
+      --> src/lib.rs:65:13
+       |
+    65 |     let b = Box::new(42_i32);
+       |             ^^^^^^^^^^^^^^^^
+    help: alloc43710 was deallocated here:
+      --> src/lib.rs:69:9
+       |
+    69 |         drop(Box::from_raw(raw));
+       |         ^^^^^^^^^^^^^^^^^^^^^^^^
+       = note: this is on thread `use_after_free_test`
+       = note: stack backtrace:
+               0: broken_app::use_after_free
+                   at src/lib.rs:70:15: 70:19
+               1: use_after_free_test
+                   at tests/integration.rs:45:20: 45:48
+               2: use_after_free_test::{closure#0}
+                   at tests/integration.rs:43:25: 43:25
+
+    note: some details are omitted, run with `MIRIFLAGS=-Zmiri-backtrace=full` for a verbose backtrace
+
+    error: aborting due to 1 previous error
+
+
+    (test failed with exit code 1)
+
+        PASS [   0.637s] (6/8) broken-app::integration normalize_simple
+        PASS [   0.643s] (7/8) broken-app::integration averages_only_positive
+        FAIL [   0.773s] (8/8) broken-app::integration counts_non_zero_bytes
+  stdout ───
+
+    running 1 test
+    test counts_non_zero_bytes ... ok
+
+    test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.15s
+
+  stderr ───
+    error: memory leaked: alloc43375 (Rust heap, size: 5, align: 1), allocated here:
+       --> /xxx/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/alloc/src/raw_vec/mod.rs:465:41
+        |
+    465 |             AllocInit::Uninitialized => alloc.allocate(layout),
+        |                                         ^^^^^^^^^^^^^^^^^^^^^^
+        |
+        = note: stack backtrace:
+                0: alloc::raw_vec::RawVecInner::try_allocate_in
+                    at /xxx/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/alloc/src/raw_vec/mod.rs:465:41: 465:63
+                1: alloc::raw_vec::RawVecInner::with_capacity_in
+                    at /xxx/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/alloc/src/raw_vec/mod.rs:434:15: 434:92
+                2: alloc::raw_vec::RawVec::<u8>::with_capacity_in
+                    at /xxx/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/alloc/src/raw_vec/mod.rs:177:20: 177:77
+                3: std::vec::Vec::<u8>::with_capacity_in
+                    at /xxx/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/alloc/src/vec/mod.rs:977:20: 977:61
+                4: <u8 as std::slice::<impl [T]>::to_vec_in::ConvertVec>::to_vec::<std::alloc::Global>
+                    at /xxx/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/alloc/src/slice.rs:448:29: 448:62
+                5: std::slice::<impl [u8]>::to_vec_in::<std::alloc::Global>
+                    at /xxx/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/alloc/src/slice.rs:400:16: 400:38
+                6: std::slice::<impl [u8]>::to_vec
+                    at /xxx/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/alloc/src/slice.rs:376:9: 376:31
+                7: broken_app::leak_buffer
+                    at src/lib.rs:23:17: 23:31
+                8: counts_non_zero_bytes
+                    at tests/integration.rs:13:16: 13:34
+                9: counts_non_zero_bytes::{closure#0}
+                    at tests/integration.rs:11:27: 11:27
+
+    note: some details are omitted, run with `MIRIFLAGS=-Zmiri-backtrace=full` for a verbose backtrace
+
+    note: set `MIRIFLAGS=-Zmiri-ignore-leaks` to disable this check
+
+    error: aborting due to 1 previous error
+
+
+    (test failed with exit code 1)
+
+────────────
+     Summary [   0.774s] 8 tests run: 5 passed, 3 failed, 0 skipped
+        FAIL [   0.576s] (1/8) broken-app::integration race_increment_test
+        FAIL [   0.635s] (5/8) broken-app::integration use_after_free_test
+        FAIL [   0.773s] (8/8) broken-app::integration counts_non_zero_bytes
+error: test run failed

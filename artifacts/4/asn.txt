@@ -1,0 +1,167 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.13s
+     Running tests/integration.rs (target/aarch64-apple-darwin/debug/deps/integration-c699f19252088ae8)
+=================================================================
+==32210==ERROR: AddressSanitizer: heap-use-after-free on address 0x602000005090 at pc 0x000104294e04 bp 0x00016cd97ea0 sp 0x00016cd97e98
+READ of size 4 at 0x602000005090 thread T8
+    #0 0x000104294e00 in _RNvCs5yKQ5NfBcKo_10broken_app14use_after_free+0x224 (integration-c699f19252088ae8:arm64+0x1001d4e00)
+    #1 0x0001040c4234 in _RNvCsaM4spmW1277_11integrations_19use_after_free_test integration.rs:45
+    #2 0x0001040c172c in _RNCNvCsaM4spmW1277_11integration19use_after_free_test0B3_ integration.rs:43
+    #3 0x0001040c61e4 in _RNvYNCNvCsaM4spmW1277_11integration19use_after_free_test0INtNtNtCsao2AfNvz99X_4core3ops8function6FnOnceuE9call_onceB6_ function.rs:250
+    #4 0x0001041b4704 in _RNvYFEINtNtCsao2AfNvz99X_4core6result6ResultuNtNtCs5fA7xRcAODh_5alloc6string6StringEINtNtNtB9_3ops8function6FnOnceuE9call_onceCs5bW25OXPyx_4test+0x10 (integration-c699f19252088ae8:arm64+0x1000f4704)
+    #5 0x0001040f67a0 in _RINvCs5bW25OXPyx_4test28___rust_begin_short_backtraceINtNtCsao2AfNvz99X_4core6result6ResultuNtNtCs5fA7xRcAODh_5alloc6string6StringEFEBP_EB2_+0x150 (integration-c699f19252088ae8:arm64+0x1000367a0)
+    #6 0x00010411e6ec in _RNvMs2_NtCs5bW25OXPyx_4test5typesNtB5_12RunnableTest3run+0x1bc (integration-c699f19252088ae8:arm64+0x10005e6ec)
+    #7 0x000104101854 in _RNCNvCs5bW25OXPyx_4test19run_test_in_process0B3_+0x134 (integration-c699f19252088ae8:arm64+0x100041854)
+    #8 0x0001040dd988 in _RNvXsn_NtNtCsao2AfNvz99X_4core5panic11unwind_safeINtB5_16AssertUnwindSafeNCNvCs5bW25OXPyx_4test19run_test_in_process0EINtNtNtB9_3ops8function6FnOnceuE9call_onceB1d_+0x134 (integration-c699f19252088ae8:arm64+0x10001d988)
+    #9 0x00010415ad50 in _RINvNvNtCslQVQibza5fz_3std9panicking12catch_unwind7do_callINtNtNtCsao2AfNvz99X_4core5panic11unwind_safe16AssertUnwindSafeNCNvCs5bW25OXPyx_4test19run_test_in_process0EINtNtB11_6result6ResultuNtNtCs5fA7xRcAODh_5alloc6string6StringEEB1Z_+0x220 (integration-c699f19252088ae8:arm64+0x10009ad50)
+    #10 0x00010416ef30 in __rust_try+0x1c (integration-c699f19252088ae8:arm64+0x1000aef30)
+    #11 0x000104159804 in _RINvNtCslQVQibza5fz_3std9panicking12catch_unwindINtNtCsao2AfNvz99X_4core6result6ResultuNtNtCs5fA7xRcAODh_5alloc6string6StringEINtNtNtBP_5panic11unwind_safe16AssertUnwindSafeNCNvCs5bW25OXPyx_4test19run_test_in_process0EEB2P_+0x27c (integration-c699f19252088ae8:arm64+0x100099804)
+    #12 0x000104158a74 in _RINvNtCslQVQibza5fz_3std5panic12catch_unwindINtNtNtCsao2AfNvz99X_4core5panic11unwind_safe16AssertUnwindSafeNCNvCs5bW25OXPyx_4test19run_test_in_process0EINtNtBN_6result6ResultuNtNtCs5fA7xRcAODh_5alloc6string6StringEEB1L_+0x134 (integration-c699f19252088ae8:arm64+0x100098a74)
+    #13 0x000104105b08 in _RNvCs5bW25OXPyx_4test19run_test_in_process+0x604 (integration-c699f19252088ae8:arm64+0x100045b08)
+    #14 0x000104103180 in _RNCNvCs5bW25OXPyx_4test8run_test0B3_+0x4e0 (integration-c699f19252088ae8:arm64+0x100043180)
+    #15 0x0001041038e4 in _RNCNvCs5bW25OXPyx_4test8run_tests_0B3_+0x444 (integration-c699f19252088ae8:arm64+0x1000438e4)
+    #16 0x0001041d8594 in _RINvNtNtCslQVQibza5fz_3std3sys9backtrace28___rust_begin_short_backtraceNCNvCs5bW25OXPyx_4test8run_tests_0uEB1b_+0x14 (integration-c699f19252088ae8:arm64+0x100118594)
+    #17 0x0001041aa6f8 in _RNCNCINvNtNtCslQVQibza5fz_3std6thread9lifecycle15spawn_uncheckedNCNvCs5bW25OXPyx_4test8run_tests_0uEs_00B14_+0x1a8 (integration-c699f19252088ae8:arm64+0x1000ea6f8)
+    #18 0x0001040dd7c4 in _RNvXsn_NtNtCsao2AfNvz99X_4core5panic11unwind_safeINtB5_16AssertUnwindSafeNCNCINvNtNtCslQVQibza5fz_3std6thread9lifecycle15spawn_uncheckedNCNvCs5bW25OXPyx_4test8run_tests_0uEs_00EINtNtNtB9_3ops8function6FnOnceuE9call_onceB2e_+0x130 (integration-c699f19252088ae8:arm64+0x10001d7c4)
+    #19 0x00010415aa54 in _RINvNvNtCslQVQibza5fz_3std9panicking12catch_unwind7do_callINtNtNtCsao2AfNvz99X_4core5panic11unwind_safe16AssertUnwindSafeNCNCINvNtNtB6_6thread9lifecycle15spawn_uncheckedNCNvCs5bW25OXPyx_4test8run_tests_0uEs_00EuEB2L_+0x1d4 (integration-c699f19252088ae8:arm64+0x10009aa54)
+    #20 0x00010416ef30 in __rust_try+0x1c (integration-c699f19252088ae8:arm64+0x1000aef30)
+    #21 0x000104159c9c in _RINvNtCslQVQibza5fz_3std9panicking12catch_unwinduINtNtNtCsao2AfNvz99X_4core5panic11unwind_safe16AssertUnwindSafeNCNCINvNtNtB4_6thread9lifecycle15spawn_uncheckedNCNvCs5bW25OXPyx_4test8run_tests_0uEs_00EEB2C_+0x260 (integration-c699f19252088ae8:arm64+0x100099c9c)
+    #22 0x0001041588a0 in _RINvNtCslQVQibza5fz_3std5panic12catch_unwindINtNtNtCsao2AfNvz99X_4core5panic11unwind_safe16AssertUnwindSafeNCNCINvNtNtB4_6thread9lifecycle15spawn_uncheckedNCNvCs5bW25OXPyx_4test8run_tests_0uEs_00EuEB2x_+0x130 (integration-c699f19252088ae8:arm64+0x1000988a0)
+    #23 0x0001041a8564 in _RNCINvNtNtCslQVQibza5fz_3std6thread9lifecycle15spawn_uncheckedNCNvCs5bW25OXPyx_4test8run_tests_0uEs_0B12_+0x1fc (integration-c699f19252088ae8:arm64+0x1000e8564)
+    #24 0x0001041abacc in _RNSNvYNCINvNtNtCslQVQibza5fz_3std6thread9lifecycle15spawn_uncheckedNCNvCs5bW25OXPyx_4test8run_tests_0uEs_0INtNtNtCsao2AfNvz99X_4core3ops8function6FnOnceuE9call_once6vtableB17_+0x14 (integration-c699f19252088ae8:arm64+0x1000ebacc)
+    #25 0x0001043bed2c in _RNvXst_NtCs5fA7xRcAODh_5alloc5boxedINtB5_3BoxDINtNtNtCsao2AfNvz99X_4core3ops8function6FnOnceuEp6OutputuNtNtBP_6marker4SendEL_EIBJ_uE9call_onceCslQVQibza5fz_3std+0x168 (integration-c699f19252088ae8:arm64+0x1002fed2c)
+    #26 0x0001043f86dc in _RNvNvMs0_NtNtNtCslQVQibza5fz_3std3sys6thread4unixNtB7_6Thread3new12thread_start+0x1dc (integration-c699f19252088ae8:arm64+0x1003386dc)
+    #27 0x000105856f58 in asan_thread_start(void*)+0x48 (librustc-nightly_rt.asan.dylib:arm64+0x3af58)
+    #28 0x00019d492f90 in _pthread_start+0x84 (libsystem_pthread.dylib:arm64e+0x6f90)
+    #29 0x783880019d48dd30  (<unknown module>)
+
+0x602000005090 is located 0 bytes inside of 4-byte region [0x602000005090,0x602000005094)
+freed by thread T8 here:
+    #0 0x00010585acc0 in free+0x70 (librustc-nightly_rt.asan.dylib:arm64+0x3ecc0)
+    #1 0x0001043b7018 in _RNvXNtNtNtCslQVQibza5fz_3std3sys5alloc4unixNtNtB8_5alloc6SystemNtNtNtCsao2AfNvz99X_4core5alloc6global11GlobalAlloc7deallocB8_+0x28 (integration-c699f19252088ae8:arm64+0x1002f7018)
+    #2 0x0001043382dc in _RNvCs5sdn4AnFlNo_7___rustc13___rdl_dealloc+0x5c (integration-c699f19252088ae8:arm64+0x1002782dc)
+    #3 0x000104279088 in _RNvNtCs5fA7xRcAODh_5alloc5alloc15dealloc_nonnullCs5yKQ5NfBcKo_10broken_app+0x140 (integration-c699f19252088ae8:arm64+0x1001b9088)
+    #4 0x000104278d3c in _RNvMNtCs5fA7xRcAODh_5alloc5allocNtB2_6Global23deallocate_impl_runtimeCs5yKQ5NfBcKo_10broken_app+0x13c (integration-c699f19252088ae8:arm64+0x1001b8d3c)
+    #5 0x000104278988 in _RNvMNtCs5fA7xRcAODh_5alloc5allocNtB2_6Global15deallocate_implCs5yKQ5NfBcKo_10broken_app+0x38 (integration-c699f19252088ae8:arm64+0x1001b8988)
+    #6 0x0001042792c4 in _RNvXs_NtCs5fA7xRcAODh_5alloc5allocNtB4_6GlobalNtNtCsao2AfNvz99X_4core5alloc9Allocator10deallocateCs5yKQ5NfBcKo_10broken_app+0x24 (integration-c699f19252088ae8:arm64+0x1001b92c4)
+    #7 0x00010427b7a4 in _RNvXs8_NtCs5fA7xRcAODh_5alloc5boxedINtB5_3BoxlENtNtNtCsao2AfNvz99X_4core3ops4drop4Drop4dropCs5yKQ5NfBcKo_10broken_app+0x198 (integration-c699f19252088ae8:arm64+0x1001bb7a4)
+    #8 0x00010427aa64 in _RINvNtCsao2AfNvz99X_4core3ptr13drop_in_placeINtNtCs5fA7xRcAODh_5alloc5boxed3BoxlEECs5yKQ5NfBcKo_10broken_app+0x44 (integration-c699f19252088ae8:arm64+0x1001baa64)
+    #9 0x00010428db24 in _RINvNtCsao2AfNvz99X_4core3mem4dropINtNtCs5fA7xRcAODh_5alloc5boxed3BoxlEECs5yKQ5NfBcKo_10broken_app+0x104 (integration-c699f19252088ae8:arm64+0x1001cdb24)
+    #10 0x000104294d64 in _RNvCs5yKQ5NfBcKo_10broken_app14use_after_free+0x188 (integration-c699f19252088ae8:arm64+0x1001d4d64)
+    #11 0x0001040c4234 in _RNvCsaM4spmW1277_11integrations_19use_after_free_test integration.rs:45
+    #12 0x0001040c172c in _RNCNvCsaM4spmW1277_11integration19use_after_free_test0B3_ integration.rs:43
+    #13 0x0001040c61e4 in _RNvYNCNvCsaM4spmW1277_11integration19use_after_free_test0INtNtNtCsao2AfNvz99X_4core3ops8function6FnOnceuE9call_onceB6_ function.rs:250
+    #14 0x0001041b4704 in _RNvYFEINtNtCsao2AfNvz99X_4core6result6ResultuNtNtCs5fA7xRcAODh_5alloc6string6StringEINtNtNtB9_3ops8function6FnOnceuE9call_onceCs5bW25OXPyx_4test+0x10 (integration-c699f19252088ae8:arm64+0x1000f4704)
+    #15 0x0001040f67a0 in _RINvCs5bW25OXPyx_4test28___rust_begin_short_backtraceINtNtCsao2AfNvz99X_4core6result6ResultuNtNtCs5fA7xRcAODh_5alloc6string6StringEFEBP_EB2_+0x150 (integration-c699f19252088ae8:arm64+0x1000367a0)
+    #16 0x00010411e6ec in _RNvMs2_NtCs5bW25OXPyx_4test5typesNtB5_12RunnableTest3run+0x1bc (integration-c699f19252088ae8:arm64+0x10005e6ec)
+    #17 0x000104101854 in _RNCNvCs5bW25OXPyx_4test19run_test_in_process0B3_+0x134 (integration-c699f19252088ae8:arm64+0x100041854)
+    #18 0x0001040dd988 in _RNvXsn_NtNtCsao2AfNvz99X_4core5panic11unwind_safeINtB5_16AssertUnwindSafeNCNvCs5bW25OXPyx_4test19run_test_in_process0EINtNtNtB9_3ops8function6FnOnceuE9call_onceB1d_+0x134 (integration-c699f19252088ae8:arm64+0x10001d988)
+    #19 0x00010415ad50 in _RINvNvNtCslQVQibza5fz_3std9panicking12catch_unwind7do_callINtNtNtCsao2AfNvz99X_4core5panic11unwind_safe16AssertUnwindSafeNCNvCs5bW25OXPyx_4test19run_test_in_process0EINtNtB11_6result6ResultuNtNtCs5fA7xRcAODh_5alloc6string6StringEEB1Z_+0x220 (integration-c699f19252088ae8:arm64+0x10009ad50)
+    #20 0x00010416ef30 in __rust_try+0x1c (integration-c699f19252088ae8:arm64+0x1000aef30)
+    #21 0x000104159804 in _RINvNtCslQVQibza5fz_3std9panicking12catch_unwindINtNtCsao2AfNvz99X_4core6result6ResultuNtNtCs5fA7xRcAODh_5alloc6string6StringEINtNtNtBP_5panic11unwind_safe16AssertUnwindSafeNCNvCs5bW25OXPyx_4test19run_test_in_process0EEB2P_+0x27c (integration-c699f19252088ae8:arm64+0x100099804)
+    #22 0x000104158a74 in _RINvNtCslQVQibza5fz_3std5panic12catch_unwindINtNtNtCsao2AfNvz99X_4core5panic11unwind_safe16AssertUnwindSafeNCNvCs5bW25OXPyx_4test19run_test_in_process0EINtNtBN_6result6ResultuNtNtCs5fA7xRcAODh_5alloc6string6StringEEB1L_+0x134 (integration-c699f19252088ae8:arm64+0x100098a74)
+    #23 0x000104105b08 in _RNvCs5bW25OXPyx_4test19run_test_in_process+0x604 (integration-c699f19252088ae8:arm64+0x100045b08)
+    #24 0x000104103180 in _RNCNvCs5bW25OXPyx_4test8run_test0B3_+0x4e0 (integration-c699f19252088ae8:arm64+0x100043180)
+    #25 0x0001041038e4 in _RNCNvCs5bW25OXPyx_4test8run_tests_0B3_+0x444 (integration-c699f19252088ae8:arm64+0x1000438e4)
+    #26 0x0001041d8594 in _RINvNtNtCslQVQibza5fz_3std3sys9backtrace28___rust_begin_short_backtraceNCNvCs5bW25OXPyx_4test8run_tests_0uEB1b_+0x14 (integration-c699f19252088ae8:arm64+0x100118594)
+    #27 0x0001041aa6f8 in _RNCNCINvNtNtCslQVQibza5fz_3std6thread9lifecycle15spawn_uncheckedNCNvCs5bW25OXPyx_4test8run_tests_0uEs_00B14_+0x1a8 (integration-c699f19252088ae8:arm64+0x1000ea6f8)
+    #28 0x0001040dd7c4 in _RNvXsn_NtNtCsao2AfNvz99X_4core5panic11unwind_safeINtB5_16AssertUnwindSafeNCNCINvNtNtCslQVQibza5fz_3std6thread9lifecycle15spawn_uncheckedNCNvCs5bW25OXPyx_4test8run_tests_0uEs_00EINtNtNtB9_3ops8function6FnOnceuE9call_onceB2e_+0x130 (integration-c699f19252088ae8:arm64+0x10001d7c4)
+    #29 0x00010415aa54 in _RINvNvNtCslQVQibza5fz_3std9panicking12catch_unwind7do_callINtNtNtCsao2AfNvz99X_4core5panic11unwind_safe16AssertUnwindSafeNCNCINvNtNtB6_6thread9lifecycle15spawn_uncheckedNCNvCs5bW25OXPyx_4test8run_tests_0uEs_00EuEB2L_+0x1d4 (integration-c699f19252088ae8:arm64+0x10009aa54)
+
+previously allocated by thread T8 here:
+    #0 0x00010585abd8 in malloc+0x6c (librustc-nightly_rt.asan.dylib:arm64+0x3ebd8)
+    #1 0x0001043b6f50 in _RNvXNtNtNtCslQVQibza5fz_3std3sys5alloc4unixNtNtB8_5alloc6SystemNtNtNtCsao2AfNvz99X_4core5alloc6global11GlobalAlloc5allocB8_+0x184 (integration-c699f19252088ae8:arm64+0x1002f6f50)
+    #2 0x000104338264 in _RNvCs5sdn4AnFlNo_7___rustc11___rdl_alloc+0x4c (integration-c699f19252088ae8:arm64+0x100278264)
+    #3 0x000104279224 in _RNvNtCs5fA7xRcAODh_5alloc5alloc5allocCs5yKQ5NfBcKo_10broken_app+0x138 (integration-c699f19252088ae8:arm64+0x1001b9224)
+    #4 0x000104278b04 in _RNvMNtCs5fA7xRcAODh_5alloc5allocNtB2_6Global18alloc_impl_runtimeCs5yKQ5NfBcKo_10broken_app+0x16c (integration-c699f19252088ae8:arm64+0x1001b8b04)
+    #5 0x000104278940 in _RNvMNtCs5fA7xRcAODh_5alloc5allocNtB2_6Global10alloc_implCs5yKQ5NfBcKo_10broken_app+0x38 (integration-c699f19252088ae8:arm64+0x1001b8940)
+    #6 0x0001042792f8 in _RNvXs_NtCs5fA7xRcAODh_5alloc5allocNtB4_6GlobalNtNtCsao2AfNvz99X_4core5alloc9Allocator8allocateCs5yKQ5NfBcKo_10broken_app+0x24 (integration-c699f19252088ae8:arm64+0x1001b92f8)
+    #7 0x000104286354 in _RNvNtCs5fA7xRcAODh_5alloc5boxed14box_new_uninitCs5yKQ5NfBcKo_10broken_app+0x2c (integration-c699f19252088ae8:arm64+0x1001c6354)
+    #8 0x000104294c18 in _RNvCs5yKQ5NfBcKo_10broken_app14use_after_free+0x3c (integration-c699f19252088ae8:arm64+0x1001d4c18)
+    #9 0x0001040c4234 in _RNvCsaM4spmW1277_11integrations_19use_after_free_test integration.rs:45
+    #10 0x0001040c172c in _RNCNvCsaM4spmW1277_11integration19use_after_free_test0B3_ integration.rs:43
+    #11 0x0001040c61e4 in _RNvYNCNvCsaM4spmW1277_11integration19use_after_free_test0INtNtNtCsao2AfNvz99X_4core3ops8function6FnOnceuE9call_onceB6_ function.rs:250
+    #12 0x0001041b4704 in _RNvYFEINtNtCsao2AfNvz99X_4core6result6ResultuNtNtCs5fA7xRcAODh_5alloc6string6StringEINtNtNtB9_3ops8function6FnOnceuE9call_onceCs5bW25OXPyx_4test+0x10 (integration-c699f19252088ae8:arm64+0x1000f4704)
+    #13 0x0001040f67a0 in _RINvCs5bW25OXPyx_4test28___rust_begin_short_backtraceINtNtCsao2AfNvz99X_4core6result6ResultuNtNtCs5fA7xRcAODh_5alloc6string6StringEFEBP_EB2_+0x150 (integration-c699f19252088ae8:arm64+0x1000367a0)
+    #14 0x00010411e6ec in _RNvMs2_NtCs5bW25OXPyx_4test5typesNtB5_12RunnableTest3run+0x1bc (integration-c699f19252088ae8:arm64+0x10005e6ec)
+    #15 0x000104101854 in _RNCNvCs5bW25OXPyx_4test19run_test_in_process0B3_+0x134 (integration-c699f19252088ae8:arm64+0x100041854)
+    #16 0x0001040dd988 in _RNvXsn_NtNtCsao2AfNvz99X_4core5panic11unwind_safeINtB5_16AssertUnwindSafeNCNvCs5bW25OXPyx_4test19run_test_in_process0EINtNtNtB9_3ops8function6FnOnceuE9call_onceB1d_+0x134 (integration-c699f19252088ae8:arm64+0x10001d988)
+    #17 0x00010415ad50 in _RINvNvNtCslQVQibza5fz_3std9panicking12catch_unwind7do_callINtNtNtCsao2AfNvz99X_4core5panic11unwind_safe16AssertUnwindSafeNCNvCs5bW25OXPyx_4test19run_test_in_process0EINtNtB11_6result6ResultuNtNtCs5fA7xRcAODh_5alloc6string6StringEEB1Z_+0x220 (integration-c699f19252088ae8:arm64+0x10009ad50)
+    #18 0x00010416ef30 in __rust_try+0x1c (integration-c699f19252088ae8:arm64+0x1000aef30)
+    #19 0x000104159804 in _RINvNtCslQVQibza5fz_3std9panicking12catch_unwindINtNtCsao2AfNvz99X_4core6result6ResultuNtNtCs5fA7xRcAODh_5alloc6string6StringEINtNtNtBP_5panic11unwind_safe16AssertUnwindSafeNCNvCs5bW25OXPyx_4test19run_test_in_process0EEB2P_+0x27c (integration-c699f19252088ae8:arm64+0x100099804)
+    #20 0x000104158a74 in _RINvNtCslQVQibza5fz_3std5panic12catch_unwindINtNtNtCsao2AfNvz99X_4core5panic11unwind_safe16AssertUnwindSafeNCNvCs5bW25OXPyx_4test19run_test_in_process0EINtNtBN_6result6ResultuNtNtCs5fA7xRcAODh_5alloc6string6StringEEB1L_+0x134 (integration-c699f19252088ae8:arm64+0x100098a74)
+    #21 0x000104105b08 in _RNvCs5bW25OXPyx_4test19run_test_in_process+0x604 (integration-c699f19252088ae8:arm64+0x100045b08)
+    #22 0x000104103180 in _RNCNvCs5bW25OXPyx_4test8run_test0B3_+0x4e0 (integration-c699f19252088ae8:arm64+0x100043180)
+    #23 0x0001041038e4 in _RNCNvCs5bW25OXPyx_4test8run_tests_0B3_+0x444 (integration-c699f19252088ae8:arm64+0x1000438e4)
+    #24 0x0001041d8594 in _RINvNtNtCslQVQibza5fz_3std3sys9backtrace28___rust_begin_short_backtraceNCNvCs5bW25OXPyx_4test8run_tests_0uEB1b_+0x14 (integration-c699f19252088ae8:arm64+0x100118594)
+    #25 0x0001041aa6f8 in _RNCNCINvNtNtCslQVQibza5fz_3std6thread9lifecycle15spawn_uncheckedNCNvCs5bW25OXPyx_4test8run_tests_0uEs_00B14_+0x1a8 (integration-c699f19252088ae8:arm64+0x1000ea6f8)
+    #26 0x0001040dd7c4 in _RNvXsn_NtNtCsao2AfNvz99X_4core5panic11unwind_safeINtB5_16AssertUnwindSafeNCNCINvNtNtCslQVQibza5fz_3std6thread9lifecycle15spawn_uncheckedNCNvCs5bW25OXPyx_4test8run_tests_0uEs_00EINtNtNtB9_3ops8function6FnOnceuE9call_onceB2e_+0x130 (integration-c699f19252088ae8:arm64+0x10001d7c4)
+    #27 0x00010415aa54 in _RINvNvNtCslQVQibza5fz_3std9panicking12catch_unwind7do_callINtNtNtCsao2AfNvz99X_4core5panic11unwind_safe16AssertUnwindSafeNCNCINvNtNtB6_6thread9lifecycle15spawn_uncheckedNCNvCs5bW25OXPyx_4test8run_tests_0uEs_00EuEB2L_+0x1d4 (integration-c699f19252088ae8:arm64+0x10009aa54)
+    #28 0x00010416ef30 in __rust_try+0x1c (integration-c699f19252088ae8:arm64+0x1000aef30)
+    #29 0x000104159c9c in _RINvNtCslQVQibza5fz_3std9panicking12catch_unwinduINtNtNtCsao2AfNvz99X_4core5panic11unwind_safe16AssertUnwindSafeNCNCINvNtNtB4_6thread9lifecycle15spawn_uncheckedNCNvCs5bW25OXPyx_4test8run_tests_0uEs_00EEB2C_+0x260 (integration-c699f19252088ae8:arm64+0x100099c9c)
+
+Thread T8 created by T0 here:
+    #0 0x000105851e3c in pthread_create+0x58 (librustc-nightly_rt.asan.dylib:arm64+0x35e3c)
+    #1 0x0001043f24c8 in _RNvMs0_NtNtNtCslQVQibza5fz_3std3sys6thread4unixNtB5_6Thread3new+0x668 (integration-c699f19252088ae8:arm64+0x1003324c8)
+    #2 0x0001041a138c in _RINvNtNtCslQVQibza5fz_3std6thread9lifecycle15spawn_uncheckedNCNvCs5bW25OXPyx_4test8run_tests_0uEB10_+0x840 (integration-c699f19252088ae8:arm64+0x1000e138c)
+    #3 0x0001041b7cf4 in _RINvMNtNtCslQVQibza5fz_3std6thread7builderNtB3_7Builder15spawn_uncheckedNCNvCs5bW25OXPyx_4test8run_tests_0uEB1c_+0x2b4 (integration-c699f19252088ae8:arm64+0x1000f7cf4)
+    #4 0x0001041b7fcc in _RINvMNtNtCslQVQibza5fz_3std6thread7builderNtB3_7Builder5spawnNCNvCs5bW25OXPyx_4test8run_tests_0uEB11_+0x144 (integration-c699f19252088ae8:arm64+0x1000f7fcc)
+    #5 0x000104107db8 in _RNvCs5bW25OXPyx_4test8run_test+0xe94 (integration-c699f19252088ae8:arm64+0x100047db8)
+    #6 0x0001040f9138 in _RINvCs5bW25OXPyx_4test9run_testsNCNvNtB2_7console17run_tests_consoles0_0EB2_+0x1d40 (integration-c699f19252088ae8:arm64+0x100039138)
+    #7 0x000104161c28 in _RNvNtCs5bW25OXPyx_4test7console17run_tests_console+0x4c0 (integration-c699f19252088ae8:arm64+0x1000a1c28)
+    #8 0x0001040f60dc in _RINvCs5bW25OXPyx_4test15test_main_innerNCNvB2_16test_main_static0EB2_+0x5b4 (integration-c699f19252088ae8:arm64+0x1000360dc)
+    #9 0x000104104d60 in _RNvCs5bW25OXPyx_4test16test_main_static+0x328 (integration-c699f19252088ae8:arm64+0x100044d60)
+    #10 0x0001040c3870 in _RNvCsaM4spmW1277_11integration4main integration.rs:1
+    #11 0x0001040c5ef0 in _RNvYFEuINtNtNtCsao2AfNvz99X_4core3ops8function6FnOnceuE9call_onceCsaM4spmW1277_11integration function.rs:250
+    #12 0x0001040c52b8 in _RINvNtNtCslQVQibza5fz_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECsaM4spmW1277_11integration backtrace.rs:166
+    #13 0x0001040c154c in _RNCINvNtCslQVQibza5fz_3std2rt10lang_startuE0CsaM4spmW1277_11integration rt.rs:206
+    #14 0x0001043e4544 in _RNvXs0_NtNtNtCsao2AfNvz99X_4core3ops8function5implsRDINtB7_2FnuEp6OutputlNtNtBb_6marker4SyncNtNtNtBb_5panic11unwind_safe13RefUnwindSafeEL_INtB7_6FnOnceuE9call_onceCslQVQibza5fz_3std+0x5c (integration-c699f19252088ae8:arm64+0x100324544)
+    #15 0x0001043a54e0 in _RINvNvNtCslQVQibza5fz_3std9panicking12catch_unwind7do_callRDINtNtNtCsao2AfNvz99X_4core3ops8function2FnuEp6OutputlNtNtB13_6marker4SyncNtNtNtB13_5panic11unwind_safe13RefUnwindSafeEL_lEB6_+0x90 (integration-c699f19252088ae8:arm64+0x1002e54e0)
+    #16 0x0001043bf114 in __rust_try+0x1c (integration-c699f19252088ae8:arm64+0x1002ff114)
+    #17 0x0001043a30fc in _RINvNtCslQVQibza5fz_3std9panicking12catch_unwindlRDINtNtNtCsao2AfNvz99X_4core3ops8function2FnuEp6OutputlNtNtBU_6marker4SyncNtNtNtBU_5panic11unwind_safe13RefUnwindSafeEL_EB4_+0x184 (integration-c699f19252088ae8:arm64+0x1002e30fc)
+    #18 0x000104355188 in _RINvNtCslQVQibza5fz_3std5panic12catch_unwindRDINtNtNtCsao2AfNvz99X_4core3ops8function2FnuEp6OutputlNtNtBP_6marker4SyncNtNtNtBP_5panic11unwind_safe13RefUnwindSafeEL_lEB4_+0x1c (integration-c699f19252088ae8:arm64+0x100295188)
+    #19 0x0001043eeb70 in _RNCNvNtCslQVQibza5fz_3std2rt19lang_start_internal0B5_+0x238 (integration-c699f19252088ae8:arm64+0x10032eb70)
+    #20 0x0001043a5340 in _RINvNvNtCslQVQibza5fz_3std9panicking12catch_unwind7do_callNCNvNtB6_2rt19lang_start_internal0iEB6_+0x1e0 (integration-c699f19252088ae8:arm64+0x1002e5340)
+    #21 0x0001043bf114 in __rust_try+0x1c (integration-c699f19252088ae8:arm64+0x1002ff114)
+    #22 0x0001043a2d90 in _RINvNtCslQVQibza5fz_3std9panicking12catch_unwindiNCNvNtB4_2rt19lang_start_internal0EB4_+0x26c (integration-c699f19252088ae8:arm64+0x1002e2d90)
+    #23 0x0001043550dc in _RINvNtCslQVQibza5fz_3std5panic12catch_unwindNCNvNtB4_2rt19lang_start_internal0iEB4_+0x138 (integration-c699f19252088ae8:arm64+0x1002950dc)
+    #24 0x0001043f62d0 in _RNvNtCslQVQibza5fz_3std2rt19lang_start_internal+0x1a0 (integration-c699f19252088ae8:arm64+0x1003362d0)
+    #25 0x0001040c1484 in _RINvNtCslQVQibza5fz_3std2rt10lang_startuECsaM4spmW1277_11integration rt.rs:205
+    #26 0x0001040c4cc0 in main+0x20 (integration-c699f19252088ae8:arm64+0x100004cc0)
+    #27 0x00019d107150 in start+0x9a8 (dyld:arm64e+0x6150)
+    #28 0x800c7ffffffffffc  (<unknown module>)
+
+SUMMARY: AddressSanitizer: heap-use-after-free (integration-c699f19252088ae8:arm64+0x1001d4e00) in _RNvCs5yKQ5NfBcKo_10broken_app14use_after_free+0x224
+Shadow bytes around the buggy address:
+  0x602000004e00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x602000004e80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x602000004f00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x602000004f80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x602000005000: fa fa fa fa fa fa fd fa fa fa fd fd fa fa fd fd
+=>0x602000005080: fa fa[fd]fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x602000005100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x602000005180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x602000005200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x602000005280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x602000005300: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==32210==ABORTING
+error: test failed, to rerun pass `--test integration`
+

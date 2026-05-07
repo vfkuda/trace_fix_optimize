@@ -1,0 +1,57 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.05s
+────────────
+ Nextest run ID 63a133b9-6c3a-4b60-8301-309495424b1d with nextest profile: default
+    Starting 8 tests across 3 binaries
+        FAIL [   0.007s] (1/8) broken-app::integration race_increment_test
+  stdout ───
+
+    running 1 test
+    test race_increment_test ... FAILED
+
+    failures:
+
+    failures:
+        race_increment_test
+
+    test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.00s
+
+  stderr ───
+
+    thread 'race_increment_test' (2349616) panicked at tests/integration.rs:52:5:
+    assertion `left == right` failed
+      left: 6885
+     right: 8000
+    note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+        FAIL [   0.007s] (2/8) broken-app::integration use_after_free_test
+  stdout ───
+
+    running 1 test
+    test use_after_free_test ... FAILED
+
+    failures:
+
+    failures:
+        use_after_free_test
+
+    test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.00s
+
+  stderr ───
+
+    thread 'use_after_free_test' (2349614) panicked at tests/integration.rs:45:9:
+    assertion `left == right` failed
+      left: 42
+     right: 84
+    note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+        PASS [   0.006s] (3/8) broken-app::integration counts_non_zero_bytes
+        PASS [   0.006s] (4/8) broken-app::integration fib_small_numbers
+        PASS [   0.006s] (5/8) broken-app::integration normalize_simple
+        PASS [   0.006s] (6/8) broken-app::integration sums_even_numbers
+        PASS [   0.006s] (7/8) broken-app::integration dedup_preserves_uniques
+        PASS [   0.006s] (8/8) broken-app::integration averages_only_positive
+────────────
+     Summary [   0.010s] 8 tests run: 6 passed, 2 failed, 0 skipped
+        FAIL [   0.007s] (1/8) broken-app::integration race_increment_test
+        FAIL [   0.007s] (2/8) broken-app::integration use_after_free_test
+error: test run failed
