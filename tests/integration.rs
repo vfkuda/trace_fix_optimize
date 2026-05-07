@@ -1,4 +1,4 @@
-use broken_app::{algo, leak_buffer, normalize, sum_even};
+use broken_app::{algo, concurrency, leak_buffer, normalize, sum_even};
 
 #[test]
 fn sums_even_numbers() {
@@ -31,6 +31,23 @@ fn normalize_simple() {
 
 #[test]
 fn averages_only_positive() {
+    // zero elements test case
+    let nums = [];
+    assert!((broken_app::average_positive(&nums) - 0.0).abs() < f64::EPSILON);
+    // general case
     let nums = [-5, 5, 15];
     assert!((broken_app::average_positive(&nums) - 10.0).abs() < f64::EPSILON);
+}
+
+#[test]
+fn use_after_free_test() {
+    unsafe {
+        assert_eq!(broken_app::use_after_free(), 42 + 42);
+    }
+}
+
+#[test]
+fn race_increment_test() {
+    let total = concurrency::race_increment(1000, 8);
+    assert_eq!(total, 8000);
 }
