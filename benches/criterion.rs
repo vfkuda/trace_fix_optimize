@@ -1,4 +1,4 @@
-use broken_app::{algo, leak_buffer, sum_even};
+use broken_app::{algo, leak_buffer, normalize, sum_even};
 use criterion::{BatchSize, Criterion, criterion_group, criterion_main};
 
 fn bench_sum_even(c: &mut Criterion) {
@@ -28,11 +28,17 @@ fn bench_leak_buffer(c: &mut Criterion) {
     c.bench_function("leak_buffer_broken", |b| b.iter(|| leak_buffer(&data)));
 }
 
+fn bench_normalize(c: &mut Criterion) {
+    let data = "  HeLLo   WoRld\t Rust   Bench  ";
+    c.bench_function("slow_normalize", |b| b.iter(|| normalize(data)));
+}
+
 criterion_group!(
     benches,
     bench_sum_even,
     bench_fib,
     bench_dedup,
-    bench_leak_buffer
+    bench_leak_buffer,
+    bench_normalize
 );
 criterion_main!(benches);
