@@ -1,0 +1,17 @@
+   Compiling broken-app v0.1.0 (/xxx/src/rust-yap-course/mod05-project/github/trace_fix_optimize)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.48s
+info: for the target platform, using target runner `/xxx/.rustup/toolchains/nightly-aarch64-apple-darwin/bin/cargo-miri runner` defined by `target.cfg(all()).runner` specified by `--config`
+info: for the host platform, using target runner `/xxx/.rustup/toolchains/nightly-aarch64-apple-darwin/bin/cargo-miri runner` defined by `target.cfg(all()).runner` specified by `--config`
+────────────
+ Nextest run ID c58c81ba-d938-406c-b460-b6e122317744 with nextest profile: default-miri
+    Starting 8 tests across 4 binaries
+        PASS [   0.692s] (1/8) broken-app::integration counts_non_zero_bytes
+        PASS [   0.694s] (2/8) broken-app::integration sums_even_numbers
+        PASS [   0.695s] (3/8) broken-app::integration normalize_simple
+        PASS [   0.703s] (4/8) broken-app::integration fib_small_numbers
+        PASS [   0.723s] (5/8) broken-app::integration averages_only_positive
+        PASS [   0.732s] (6/8) broken-app::integration use_after_free_test
+        PASS [   0.742s] (7/8) broken-app::integration dedup_preserves_uniques
+        PASS [   1.234s] (8/8) broken-app::integration race_increment_test
+────────────
+     Summary [   1.235s] 8 tests run: 8 passed, 0 skipped

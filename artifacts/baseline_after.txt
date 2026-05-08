@@ -1,0 +1,9 @@
+sum_even: 0ns
+slow_fib: 42ns
+slow_dedup: 171.834µs
+sum_even: 42ns
+slow_fib: 0ns
+slow_dedup: 150.292µs
+sum_even: 0ns
+slow_fib: 42ns
+slow_dedup: 147.959µs

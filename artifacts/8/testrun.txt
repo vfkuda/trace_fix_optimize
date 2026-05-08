@@ -1,0 +1,14 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.05s
+────────────
+ Nextest run ID ad6e44dc-da2c-4978-b7f9-aa6293f382ff with nextest profile: default
+    Starting 8 tests across 4 binaries
+        PASS [   0.007s] (1/8) broken-app::integration fib_small_numbers
+        PASS [   0.007s] (2/8) broken-app::integration use_after_free_test
+        PASS [   0.007s] (3/8) broken-app::integration normalize_simple
+        PASS [   0.007s] (4/8) broken-app::integration counts_non_zero_bytes
+        PASS [   0.007s] (5/8) broken-app::integration dedup_preserves_uniques
+        PASS [   0.007s] (6/8) broken-app::integration averages_only_positive
+        PASS [   0.007s] (7/8) broken-app::integration sums_even_numbers
+        PASS [   0.009s] (8/8) broken-app::integration race_increment_test
+────────────
+     Summary [   0.009s] 8 tests run: 8 passed, 0 skipped
