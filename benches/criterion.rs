@@ -1,5 +1,5 @@
-use broken_app::{algo, sum_even};
-use criterion::{criterion_group, criterion_main, BatchSize, Criterion};
+use broken_app::{algo, leak_buffer, sum_even};
+use criterion::{BatchSize, Criterion, criterion_group, criterion_main};
 
 fn bench_sum_even(c: &mut Criterion) {
     let data: Vec<i64> = (0..50_000).collect();
@@ -23,5 +23,16 @@ fn bench_dedup(c: &mut Criterion) {
     });
 }
 
-criterion_group!(benches, bench_sum_even, bench_fib, bench_dedup);
+fn bench_leak_buffer(c: &mut Criterion) {
+    let data = vec![1_u8, 16, 0, 1, 0, 2, 3, 1, 0, 16, 0, 1, 0, 2, 3];
+    c.bench_function("leak_buffer_broken", |b| b.iter(|| leak_buffer(&data)));
+}
+
+criterion_group!(
+    benches,
+    bench_sum_even,
+    bench_fib,
+    bench_dedup,
+    bench_leak_buffer
+);
 criterion_main!(benches);

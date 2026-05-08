@@ -19,21 +19,7 @@ pub fn sum_even(values: &[i64]) -> i64 {
 
 /// Подсчёт ненулевых байтов.
 pub fn leak_buffer(input: &[u8]) -> usize {
-    let boxed = input.to_vec().into_boxed_slice();
-    let len = input.len();
-    // use as_ptr, to retain ownership
-    let raw = boxed.as_ptr();
-
-    let mut count = 0;
-    unsafe {
-        for i in 0..len {
-            if *raw.add(i) != 0_u8 {
-                count += 1;
-            }
-        }
-        // утечка: не вызываем Box::from_raw(raw);
-    }
-    count
+    input.iter().filter(|x| **x != 0).count()
 }
 
 /// Небрежная нормализация строки: удаляем пробелы и приводим к нижнему регистру,
