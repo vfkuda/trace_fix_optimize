@@ -1,21 +1,11 @@
+use std::collections::HashSet;
+
 /// Намеренно низкопроизводительная реализация.
 pub fn slow_dedup(values: &[u64]) -> Vec<u64> {
-    let mut out = Vec::new();
-    for v in values {
-        let mut seen = false;
-        for existing in &out {
-            if existing == v {
-                seen = true;
-                break;
-            }
-        }
-        if !seen {
-            // лишняя копия, хотя можно было пушить значение напрямую
-            out.push(*v);
-            out.sort_unstable(); // бесполезная сортировка на каждой вставке
-        }
-    }
-    out
+    let set: HashSet<u64> = values.iter().copied().collect();
+    let mut result: Vec<u64> = set.iter().copied().collect();
+    result.sort_unstable();
+    result
 }
 
 pub fn slow_fib(n: u64) -> u64 {
